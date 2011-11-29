@@ -1,0 +1,19 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div>
+    #{list items:users, as:'user'}
+        <p>${user.id} : ${user.firstName} ${user.lastName} #{a @Application.showRevisions(user.id)}Show revisions#{/a}</p>
+    #{/list}
+</div>
+
+
+<p>
+##{form @Application.add()}
+    <label>firstName : </label><input type="text" id="firstName" name="user.firstName" value="test1"><br/>
+    <label>lastName : </label><input type="text" id="lastName" name="user.lastName" value="test1"><br/>
+    <label>login : </label><input type="text" id="login" name="user.login" value="test1"><br/>
+    <label>password : </label><input type="password" id="password" name="user.password" value="test1"><br/>
+    <input type="submit" />
+#{/form}
+</p>

@@ -1,0 +1,12 @@
+# Application dependencies
+
+require:
+    - play
+    - envers -> envers
+
+repositories:
+    - playCustomModules:
+        type: local
+        artifact: ${application.path}/../envers
+        contains:
+            - envers
