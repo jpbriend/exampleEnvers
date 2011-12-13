@@ -4,8 +4,6 @@ import models.User;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.envers.query.AuditEntity;
-import org.hibernate.envers.query.AuditQuery;
-import play.Logger;
 import play.Play;
 import play.data.validation.Required;
 import play.db.jpa.JPA;
@@ -24,15 +22,15 @@ public class Application extends Controller {
     }
 
     public static void showRevisions(String userId) {
-       User revision1 = null;
-       AuditReader reader = AuditReaderFactory.get(JPA.em());
-       List<Number> revs = reader.getRevisions(User.class, Long.valueOf(userId));
+        // Retrieve the AuditReader from the EntityManager
+        AuditReader reader = AuditReaderFactory.get(JPA.em());
 
-       if (revs.size() >= 1) {
-           revision1 = (User) reader.createQuery().forEntitiesAtRevision(User.class, revs.get(0)).getSingleResult();
-       }
+        // Retrieves all the versions of User which id is userId
+        List<User> revisions = reader.createQuery().forRevisionsOfEntity(User.class, true, true)
+                                                   .add(AuditEntity.id().eq(Long.valueOf(userId)))
+                                                   .getResultList();
 
-       render(revision1);
+        render(revisions);
    }
     
     public static void add(@Required User user) {

@@ -4,8 +4,10 @@
 ##{a @Application.index()}Home#{/a}
 
 <div>
-
-    <p>${revision1.firstName} ${revision1.lastName} (password=${revision1.password})</p>
-
+    <ul>
+    #{list items:revisions, as:'revision'}
+        <li>${revision.firstName} ${revision.lastName}</li>
+    #{/list}
+    </ul>
 </div>
 

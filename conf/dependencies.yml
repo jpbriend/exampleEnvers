@@ -7,6 +7,6 @@ require:
 repositories:
     - playCustomModules:
         type: local
-        artifact: ${application.path}/../envers
+        artifact: ${application.path}/../play-envers
         contains:
             - envers
