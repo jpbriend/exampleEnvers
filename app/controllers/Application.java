@@ -28,6 +28,7 @@ public class Application extends Controller {
         // Retrieves all the versions of User which id is userId
         List<User> revisions = reader.createQuery().forRevisionsOfEntity(User.class, true, true)
                                                    .add(AuditEntity.id().eq(Long.valueOf(userId)))
+                                                   .addOrder(AuditEntity.property("id").asc())
                                                    .getResultList();
 
         render(revisions);

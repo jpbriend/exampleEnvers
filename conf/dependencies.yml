@@ -2,11 +2,11 @@
 
 require:
     - play
-    - envers -> envers
+    - play-envers 1.0
 
 repositories:
     - playCustomModules:
         type: local
         artifact: ${application.path}/../play-envers
         contains:
-            - envers
+            - play-envers
